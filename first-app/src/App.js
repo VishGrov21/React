@@ -17,6 +17,7 @@ const App = (props) => {
   });
 
   const [otherState, setOtherState] = useState({other: "Some Text"});
+  const [showPersonState, setShowPersonState] = useState({showPerson: false});
 
   const switchNameHandler = (newName) => {
     setPersonState({
@@ -45,10 +46,28 @@ const App = (props) => {
       ]
     });
   }
+  const togglePersonHandler = () => {
+    const currentPersonState = showPersonState.showPerson;
+    setShowPersonState({
+      showPerson: !currentPersonState
+    });
+  }
+
+  let persons = null
+
+  if (showPersonState.showPerson) {
+    persons = (<div>
+      {
+        personState.person.map(person => {
+          return <Person name={person.name} age={person.age}/>
+        })
+      };
+    </div>)
+  }
+
   return (<div className="App">
-    <button onClick={switchNameHandler.bind(this, 'Karan')}>Change Name</button>
-    <Person name={personState.person[0].name} age={personState.person[0].age} click={switchNameHandler.bind(this, 'Vishal')}/>
-    <Person name={personState.person[1].name} age={personState.person[1].age} changed={nameChangeHandler}/>
+    <button onClick={togglePersonHandler}>Toggle Person</button>
+    {persons}
   </div>);
 };
 
