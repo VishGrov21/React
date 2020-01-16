@@ -1,31 +1,32 @@
-import React, {useState} from 'react';
-import './App.css';
-import Person from './Person/Person';
+import React, { useState } from "react";
+import "./App.css";
+import Person from "./Person/Person";
 
-const App = (props) => {
-
+const App = props => {
   const [personState, setPersonState] = useState({
     person: [
       {
-        name: 'Max',
+        name: "Max",
         age: 28
-      }, {
-        name: 'Manu',
+      },
+      {
+        name: "Manu",
         age: 29
       }
     ]
   });
 
-  const [otherState, setOtherState] = useState({other: "Some Text"});
-  const [showPersonState, setShowPersonState] = useState({showPerson: false});
+  const [otherState, setOtherState] = useState({ other: "Some Text" });
+  const [showPersonState, setShowPersonState] = useState({ showPerson: false });
 
-  const switchNameHandler = (newName) => {
+  const switchNameHandler = newName => {
     setPersonState({
       person: [
         {
           name: newName,
           age: 24
-        }, {
+        },
+        {
           name: "Manu",
           age: 29
         }
@@ -33,42 +34,53 @@ const App = (props) => {
     });
   };
 
-  const nameChangeHandler = (event) => {
+  const nameChangeHandler = event => {
     setPersonState({
       person: [
         {
           name: "Max",
           age: 24
-        }, {
+        },
+        {
           name: event.target.value,
           age: 29
         }
       ]
     });
-  }
+  };
   const togglePersonHandler = () => {
     const currentPersonState = showPersonState.showPerson;
     setShowPersonState({
       showPerson: !currentPersonState
     });
-  }
+  };
 
-  let persons = null
+  let persons = null;
 
   if (showPersonState.showPerson) {
-    persons = (<div>
-      {
-        personState.person.map(person => {
-          return <Person name={person.name} age={person.age}/>
-        })
-      };
-    </div>)
+    persons = (
+      <div>
+        {personState.person.map((person, index) => {
+          return (
+            <Person
+              name={person.name}
+              age={person.age}
+              changed={nameChangeHandler}
+              key={index}
+            />
+          );
+        })}
+        ;
+      </div>
+    );
   }
 
-  return (<div className="App">
-    <button onClick={togglePersonHandler}>Toggle Person</button>
-    {persons}
-  </div>);
+  return (
+    <div className="App">
+      <button onClick={togglePersonHandler}>Toggle Person</button>
+      {persons}
+    </div>
+  );
 };
 
 export default App;
