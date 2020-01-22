@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import Person from "./Person/Person";
+import Person from "../../components/Persons/Person/Person";
+import Persons from "../../components/Persons/Persons";
 
 const App = props => {
   const [personState, setPersonState] = useState({
@@ -60,17 +61,7 @@ const App = props => {
   if (showPersonState.showPerson) {
     persons = (
       <div>
-        {personState.person.map((person, index) => {
-          return (
-            <Person
-              name={person.name}
-              age={person.age}
-              changed={nameChangeHandler}
-              key={index}
-            />
-          );
-        })}
-        ;
+        <Persons person={personState.person} changed={nameChangeHandler} />
       </div>
     );
   }
