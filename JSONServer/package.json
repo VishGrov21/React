@@ -1,0 +1,14 @@
+{
+  "name": "jsonserver",
+  "version": "1.0.0",
+  "description": "Fake Rest API Server for testing React Applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vishal Grover",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.16.0"
+  }
+}
