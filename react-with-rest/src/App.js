@@ -4,14 +4,25 @@ import { Table, Button } from "reactstrap";
 
 class App extends Component {
   state = {
-    books: []
+    books: [
+      {
+        id: "5"
+      },
+      {
+        id: "7"
+      }
+    ]
   };
 
   componentDidMount() {
-    axios.get("http://localhost:3001/books").then(response => {
+    axios.get("http://localhost:3000/books/").then(response => {
+      console.log("Response -> " + response.data);
+      const books = response.data.books;
+      console.log(books);
       this.setState = {
         books: response.data
       };
+      console.log(axios.interceptors.response.use(response => response.data));
     });
   }
   render() {
@@ -32,6 +43,7 @@ class App extends Component {
         </tr>
       );
     });
+
     return (
       <div>
         <Table className="align-items-center">
@@ -43,7 +55,7 @@ class App extends Component {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>{books}</tbody>
         </Table>
       </div>
     );
