@@ -5,20 +5,26 @@ import buildControlsStyle from './BuildControls.module.css'
 const controls = [
 	{
 		label: 'Cheese',
-		type: 'cheese',
+		type: 'cheese'
 	}, {
 		label: 'Patty',
-		type: 'patty',
+		type: 'patty'
 	}, {
 		label: 'Salad',
-		type: 'salad',
+		type: 'salad'
 	}, {
 		label: 'Bacon',
-		type: 'bacon',
+		type: 'bacon'
 	},
 ]
-const buildControls = props => (<div className={buildControlsStyle.BuildControls}>
-	{controls.map(arrEle => (<BuildControl key={arrEle.label} Label={arrEle.label}/>))}
-</div>);
+const buildControls = props => (
+	<div className={buildControlsStyle.BuildControls}>
+		<p>
+			<strong>Current Price: {props.price.toFixed(2)}</strong>
+		</p>
+		{controls.map(arrEle => (<BuildControl key={arrEle.label} Label={arrEle.label} more={() => props.ingredientAdded(arrEle.type)} less={() => props.ingredientRemoved(arrEle.type)} btnDisabled={props.btnDisabled[arrEle.type]}/>))}
+		<button className={buildControlsStyle.OrderButton} disabled={!props.purchasable} onClick={props.ordered}>ORDER NOW</button>
+	</div>
+);
 
 export default buildControls
