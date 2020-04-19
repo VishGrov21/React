@@ -1,6 +1,6 @@
 import React from 'react';
 import buttonStyle from './button.module.css'
-import Aux from '../../hoc/auxiliary'
+import Aux from '../../hoc/auxiliary/auxiliary'
 
 const button = (props) => {
     return (<Aux>
