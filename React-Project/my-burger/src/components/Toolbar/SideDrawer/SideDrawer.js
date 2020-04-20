@@ -4,8 +4,8 @@ import classes from './SideDrawer.module.css';
 import Backdrop from '../../../ui/backdrop/backdrop';
 import Aux from '../../../hoc/auxiliary/auxiliary';
 import Logo from '../../../components/Logo/Logo'
-const SideDrawer = (props) => {
 
+const SideDrawer = (props) => {
     let sideDrawerClass = [classes.SideDrawer, classes.Close];
     if (props.open) {
         sideDrawerClass = [classes.SideDrawer, classes.Open]

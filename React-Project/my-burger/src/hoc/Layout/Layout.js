@@ -24,8 +24,7 @@ class Layout extends React.Component {
 					<Toolbar toggleSideDrawer={this.toggleSideDrawer} />
 					<SideDrawer close={this.sideDrawerClosedHandler} open={this.state.showSideDrawer} />
 				</div>
-				<main className={cssStyles.Asd}>{this.props.children}
-				</main>
+				<main className={cssStyles.Asd}> {this.props.children} </main>
 			</Aux>
 		);
 	}
