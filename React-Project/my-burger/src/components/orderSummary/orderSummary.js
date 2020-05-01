@@ -20,7 +20,7 @@ const orderSummary = (props) => {
 			<strong>Current Price: {props.price.toFixed(2)}</strong>
 		</p>
 		<Button clicked={props.modalClose} btnType="Danger">Cancel</Button>
-		<Button btnType="Success">Continue</Button>
+		<Button clicked={props.continueHanlder}btnType="Success" >Continue</Button>
 
 	</Aux>
 }

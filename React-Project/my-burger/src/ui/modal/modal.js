@@ -5,9 +5,7 @@ import Aux from '../../hoc/auxiliary/auxiliary'
 
 class modal extends React.Component {
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log("[modal] nextProps.ordered = " + nextProps.ordered)
-		console.log("[modal] this.props.ordered = " + this.props.ordered)
-		return nextProps.ordered !== this.props.ordered;
+		return nextProps.ordered !== this.props.ordered || nextProps.children !== this.props.children;
 	}
 
 	render() {
