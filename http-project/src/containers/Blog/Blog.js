@@ -1,42 +1,57 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
+import Posts from '../Posts/Posts'
 
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import './Blog.css';
-import axios from 'axios'
+//import NewPost from '../NewPost/NewPost';
+import asyncComponent from './../../hoc/asyncComponent';
 
+const AsyncNewPost = React.lazy(() => {
+    return (import('../NewPost/NewPost'))
+})
 class Blog extends Component {
-    state = {
-        posts: [],
-        clickedPost: null
-    }
-    componentDidMount() {
-        axios.get("https://jsonplaceholder.typicode.com/posts")
-            .then(response => {
-                const posts = response.data.slice(0, 4)
-                this.setState({ posts: posts })
-            })
-    }
-    clickedPostHandler(id) {
-        this.setState({ clickedPost: id })
-        console.log(this.state)
-    }
+
     render() {
-        const posts = this.state.posts.map(post => {
-            return <Post title={post.title} key={post.id} click={() => this.clickedPostHandler(post.id)} />
-        })
+
         return (
-            <div>
-                <section className="Posts">
+            <div className="Blog">
+                <header>
+                    <nav>
+                        <ul>
+                            <li><NavLink
+                                exact
+                                to="/posts"
+                                activeClassName="my-active"
+                                activeStyle={{ textDecoration: 'underline' }}>Home</NavLink></li>
+                            <li><NavLink exact to={{
+                                pathname: '/new-post',
+                                hash: '#submit',
+                                search: '?quick-submit=true'
+                            }}>New Post</NavLink></li>
+                        </ul>
+                    </nav>
+                </header>
+
+                <Switch>
+                    <Route path="/new-post" exact render={() => <Suspense
+                        fallback={<div>Loading...</div>}>
+                        <AsyncNewPost />
+                    </Suspense>} />
+                    <Route path="/posts" component={Posts} />
+                    <Route render={() => <p>Page Not Found</p>} />
+                    <Redirect from="/" to="/posts" />
+                    {/* <Route path="/:id" exact component={FullPost} /> */}
+                </Switch>
+
+                {/* <section className="Posts">
                     {posts}
-                </section>
-                <section>
+                </section> */}
+                {/* <section>
                     <FullPost id={this.state.clickedPost} />
                 </section>
                 <section>
                     <NewPost />
-                </section>
+                </section> */}
             </div>
         );
     }
