@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux';
+
 import Aux from '../../hoc/auxiliary/auxiliary'
 import Burger from './../../components/Burger/Burger.js'
 import Modal from './../../ui/modal/modal.js'
@@ -7,7 +9,6 @@ import BuildControls from './../../components/Burger/BuildControls/BuildControls
 import axios from '../../axios-orders'
 import Spinner from '../../ui/spinner/spinner'
 import withErrorHandler from './../../hoc/withErrorHandler/withErrorHandler';
-import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions'
 
 class BurgerBuilder extends React.Component {

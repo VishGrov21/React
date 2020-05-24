@@ -9,7 +9,6 @@ class CheckOut extends Component {
     checkoutCancelHandler = () => {
         this.props.history.goBack()
     }
-
     checkoutContinueHandler = () => {
         this.props.history.push("/checkout/contact-data")
     }
@@ -33,5 +32,4 @@ const mapStateToProps = state => {
         ingredients: state.ingredient,
     }
 }
-
 export default connect(mapStateToProps)(CheckOut);
