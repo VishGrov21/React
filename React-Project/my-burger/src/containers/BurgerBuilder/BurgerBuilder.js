@@ -9,13 +9,12 @@ import BuildControls from './../../components/Burger/BuildControls/BuildControls
 import axios from '../../axios-orders'
 import Spinner from '../../ui/spinner/spinner'
 import withErrorHandler from './../../hoc/withErrorHandler/withErrorHandler';
-import * as actionTypes from '../../store/actions'
+import * as burgerBuilderActions from '../../store/actions/index'
 
 class BurgerBuilder extends React.Component {
 	state = {
 		purchase: false,
 		loading: false,
-		error: false,
 	}
 
 	updatepurchasable = (ingredients) => {
@@ -39,16 +38,11 @@ class BurgerBuilder extends React.Component {
 		this.props.history.push({
 			pathname: "/checkout",
 		})
+		console.log("this.props.history", this.props.history)
 	}
 
 	componentDidMount() {
-		// axios.get('ingredients.json')
-		// 	.then(response => {
-		// 		this.setState({ ingredients: response.data })
-		// 	})
-		// 	.catch(error => {
-		// 		this.setState({ error: error })
-		// 	})
+		this.props.setIngredientHandler();
 	}
 
 	render() {
@@ -59,7 +53,7 @@ class BurgerBuilder extends React.Component {
 		for (let key in disabledInfo) {
 			disabledInfo[key] = disabledInfo[key] <= 0;
 		}
-		let burger = this.state.error ? <p>Failed to load the Ingredients</p> : <Spinner />
+		let burger = this.props.error ? <p>Failed to load the Ingredients</p> : <Spinner />
 		let orderSummary = null
 		if (this.props.ingredients) {
 			burger = <Aux>
@@ -99,21 +93,17 @@ class BurgerBuilder extends React.Component {
 }
 const mapStateToProps = state => {
 	return {
-		ingredients: state.ingredient,
-		totalPrice: state.price,
+		ingredients: state.burgerBuilderReducer.ingredient,
+		totalPrice: state.burgerBuilderReducer.price,
+		error: state.burgerBuilderReducer.error,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addedIngredientHandler: ingredientName => dispatch({
-			type: actionTypes.ADD_INGREDIENT,
-			ingredientName: ingredientName
-		}),
-		removeIngredientHandler: ingredientName => dispatch({
-			type: actionTypes.REMOVE_INGREDIENT,
-			ingredientName: ingredientName
-		})
+		addedIngredientHandler: ingredientName => dispatch(burgerBuilderActions.addIngredient(ingredientName)),
+		removeIngredientHandler: ingredientName => dispatch(burgerBuilderActions.removeIngredient(ingredientName)),
+		setIngredientHandler: () => dispatch(burgerBuilderActions.loadIngredients())
 	}
 }
 

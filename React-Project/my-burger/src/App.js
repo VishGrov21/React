@@ -8,12 +8,13 @@ import { Route, Switch } from 'react-router-dom';
 
 
 function App() {
+
 	return (<div >
 		<Layout>
 			<Switch>
+				<Route path="/" exact component={BurgerBuilder} />
 				<Route path="/my-orders" component={Orders} />
 				<Route path="/checkout" component={CheckOut} />
-				<Route path="/" exact component={BurgerBuilder} />
 			</Switch>
 		</Layout>
 	</div>);
