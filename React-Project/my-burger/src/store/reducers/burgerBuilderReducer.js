@@ -9,9 +9,9 @@ const initialState = {
     ingredient: null,
     price: 30,
     error: false,
+    buildingBurger: false,
 };
 const burgerBuilderReducer = (state = initialState, action) => {
-    console.log(state.ingredient)
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
             return {
@@ -35,6 +35,7 @@ const burgerBuilderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredient: action.ingredients,
+                price: 30,
                 error: false,
             }
         case actionTypes.FETCH_INGREDIENTS_FAILED:

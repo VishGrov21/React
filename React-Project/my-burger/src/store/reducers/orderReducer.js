@@ -51,7 +51,7 @@ function fetchOrdersFailure(state, action) {
         error: true,
     }
 }
-export default orderReducer = (state = initialState, action) => {
+const orderReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ORDER_PURCHASE_START: return orderPurchaseStart(state, action)
         case actionTypes.ORDER_PURCHASE_SUCCESS: return orderPurchaseSuccess(state, action)
@@ -62,3 +62,5 @@ export default orderReducer = (state = initialState, action) => {
         default: return state;
     }
 }
+
+export default orderReducer;
