@@ -11,7 +11,7 @@ import Spinner from '../../ui/spinner/spinner'
 import withErrorHandler from './../../hoc/withErrorHandler/withErrorHandler';
 import * as burgerBuilderActions from '../../store/actions/index'
 
-class BurgerBuilder extends React.Component {
+export class BurgerBuilder extends React.Component {
 	state = {
 		purchase: false,
 		loading: false,
